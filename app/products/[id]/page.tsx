@@ -20,6 +20,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             openGraph: {
                 title: product.title,
                 description: product.description,
+                type: 'website',
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title: product.title,
+                description: product.description,
             },
         };
     } catch (error) {
