@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --background: #e0e5ec;
+  --foreground: #4a5568;
+  --light-shadow: #ffffff;
+  --dark-shadow: #a3b1c6;
+  --accent: #6b7280;
+  
+  /* Neumorphism Shadows */
+  --nm-flat: 6px 6px 12px var(--dark-shadow), -6px -6px 12px var(--light-shadow);
+  --nm-inset: inset 6px 6px 12px var(--dark-shadow), inset -6px -6px 12px var(--light-shadow);
+  --nm-pressed: 2px 2px 5px var(--dark-shadow), -2px -2px 5px var(--light-shadow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1e1e1e;
+    --foreground: #e0e0e0;
+    --light-shadow: #2a2a2a;
+    --dark-shadow: #121212;
+    --accent: #4a5568;
+    
+    --nm-flat: 6px 6px 12px var(--dark-shadow), -6px -6px 12px var(--light-shadow);
+    --nm-inset: inset 6px 6px 12px var(--dark-shadow), inset -6px -6px 12px var(--light-shadow);
+    --nm-pressed: 2px 2px 5px var(--dark-shadow), -2px -2px 5px var(--light-shadow);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Helper classes for Neumorphism */
+.nm-flat {
+  box-shadow: var(--nm-flat);
+}
+
+.nm-inset {
+  box-shadow: var(--nm-inset);
+}
+
+.nm-pressed {
+  box-shadow: var(--nm-pressed);
+}
+
+.nm-button {
+  box-shadow: var(--nm-flat);
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+
+.nm-button:active {
+  box-shadow: var(--nm-inset);
+  transform: scale(0.98);
+}
+
+.nm-button.active {
+  box-shadow: var(--nm-inset);
+  color: var(--accent);
+}
+
+.nm-card {
+  background: var(--background);
+  border-radius: 20px;
+  box-shadow: var(--nm-flat);
+  transition: transform 0.3s ease;
+}
+
+.nm-card:hover {
+  transform: translateY(-5px);
+}
+
+.nm-card-inset {
+  background: var(--background);
+  border-radius: 20px;
+  box-shadow: var(--nm-inset);
+}
