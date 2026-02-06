@@ -35,3 +35,22 @@ export async function searchProducts(query: string): Promise<ProductsResponse> {
     if (!res.ok) throw new Error("Failed to search products");
     return res.json();
 }
+
+export async function getSitemapData(): Promise<{ id: number; updatedAt: string; images: string[] }[]> {
+    // First, fetch to get the total number of products
+    const initialRes = await fetch(`${BASE_URL}/products?limit=1&select=id`);
+    if (!initialRes.ok) throw new Error("Failed to fetch initial product data");
+    const { total } = await initialRes.json();
+
+    // Now fetch all products but only the fields we need: id and meta
+    // dummyjson supports field selection with `select`
+    const res = await fetch(`${BASE_URL}/products?limit=${total}&select=id,meta,images`);
+    if (!res.ok) throw new Error("Failed to fetch sitemap data");
+
+    const data = await res.json();
+    return data.products.map((p: any) => ({
+        id: p.id,
+        updatedAt: p.meta?.updatedAt || new Date().toISOString(),
+        images: p.images
+    }));
+}
